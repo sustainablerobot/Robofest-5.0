@@ -1,0 +1,332 @@
+:root {
+	--bg: #121212;
+	--panel: #1f1f1f;
+	--border: #2f2f2f;
+	--text: #f0f0f0;
+	--muted: #b6b6b6;
+	--accent: #00b0ff;
+	--warn: #ff9800;
+	--ok: #66bb6a;
+	--error: #ef5350;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+#app {
+	height: 100dvh;
+	height: 100vh;
+}
+
+#sidebar {
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	z-index: 1000;
+	width: min(360px, calc(100% - 24px));
+	background: #171717;
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	padding: 10px;
+	max-height: calc(100% - 24px);
+	overflow-y: auto;
+}
+
+#plannerNavHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	padding: 0;
+}
+
+#plannerNavHeader h2 {
+	margin: 0;
+	color: var(--accent);
+	font-size: 16px;
+	white-space: nowrap;
+}
+
+#btnTogglePlanner {
+	width: auto;
+	padding: 7px 10px;
+	font-size: 12px;
+	white-space: nowrap;
+}
+
+#sidebar.is-collapsed {
+	width: auto;
+	max-width: calc(100% - 24px);
+	padding: 7px 9px;
+	max-height: none;
+	overflow: hidden;
+}
+
+#sidebar.is-collapsed .panel {
+	display: none;
+}
+
+#sidebar.is-collapsed #plannerNavHeader {
+	padding: 0;
+	gap: 6px;
+}
+
+#sidebar.is-collapsed #plannerNavHeader h2 {
+	font-size: 14px;
+}
+
+#sidebar.is-collapsed #btnTogglePlanner {
+	padding: 5px 8px;
+	font-size: 11px;
+}
+
+.panel {
+	background: var(--panel);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	padding: 10px;
+	margin-bottom: 0;
+	min-width: 0;
+}
+
+.panel h3 {
+	margin: 0 0 8px;
+	font-size: 15px;
+	color: #e0e0e0;
+}
+
+.label {
+	display: block;
+	color: var(--muted);
+	font-size: 12px;
+	margin: 6px 0 4px;
+}
+
+input,
+select,
+button {
+	width: 100%;
+	border-radius: 6px;
+	border: 1px solid #3a3a3a;
+	background: #242424;
+	color: var(--text);
+	padding: 8px;
+	font-size: 13px;
+}
+
+button {
+	background: #2a2a2a;
+	cursor: pointer;
+	transition: background 0.2s ease;
+}
+
+button:hover {
+	background: #343434;
+}
+
+.button-row {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 6px;
+	margin-top: 6px;
+}
+
+.button-row button:only-child {
+	grid-column: 1 / -1;
+}
+
+.mode-btn {
+	border-color: #4b4b4b;
+}
+
+.mode-active {
+	background: #114866;
+	border-color: var(--accent);
+}
+
+.help-text {
+	color: #d0d0d0;
+	font-size: 12px;
+	margin-bottom: 4px;
+}
+
+.checkbox-inline {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 12px;
+	color: #d0d0d0;
+	margin-top: 8px;
+}
+
+.checkbox-inline input[type="checkbox"] {
+	width: auto;
+	margin: 0;
+}
+
+.status-pill {
+	margin-top: 8px;
+	padding: 7px;
+	border-radius: 16px;
+	text-align: center;
+	font-size: 12px;
+	background: #3b1f1f;
+	color: #f7b8b8;
+	border: 1px solid #5f2b2b;
+}
+
+.status-pill.connected {
+	background: #1b3b24;
+	color: #caf5d0;
+	border-color: #2e7d32;
+}
+
+.stats {
+	margin-top: 8px;
+	font-size: 12px;
+	color: #c6d6ff;
+}
+
+#mapWrap {
+	flex: 1;
+	min-height: 0;
+	position: relative;
+	height: 100%;
+}
+
+#map {
+	width: 100%;
+	height: 100%;
+}
+
+#log {
+	height: 160px;
+	overflow-y: auto;
+	background: #0f0f0f;
+	border: 1px solid #333;
+	border-radius: 6px;
+	padding: 8px;
+	font-family: "Consolas", "Courier New", monospace;
+	font-size: 12px;
+}
+
+.log-row {
+	margin-bottom: 4px;
+	color: #d7d7d7;
+}
+
+.log-ok {
+	color: var(--ok);
+}
+
+.log-warn {
+	color: var(--warn);
+}
+
+.log-error {
+	color: var(--error);
+}
+
+@media (max-width: 1400px) {
+	#sidebar {
+		width: min(340px, calc(100% - 16px));
+		top: 8px;
+		left: 8px;
+		max-height: calc(100% - 16px);
+	}
+
+	#sidebar.is-collapsed {
+		width: auto;
+		max-width: calc(100% - 16px);
+	}
+
+	#plannerNavHeader {
+		padding: 0;
+	}
+
+	.panel {
+		flex: unset;
+	}
+}
+
+@media (max-width: 768px) {
+	#sidebar {
+		top: calc(env(safe-area-inset-top, 0px) + 8px);
+		left: 8px;
+		width: min(320px, calc(100% - 16px));
+		max-height: min(78dvh, calc(100% - 16px));
+		padding: 8px;
+		border-radius: 9px;
+	}
+
+	#sidebar.is-collapsed {
+		max-width: calc(100% - 16px);
+		padding: 6px 8px;
+	}
+
+	#plannerNavHeader h2 {
+		font-size: 14px;
+	}
+
+	#btnTogglePlanner {
+		padding: 6px 8px;
+		font-size: 12px;
+	}
+
+	.panel {
+		padding: 8px;
+	}
+
+	.panel h3 {
+		font-size: 14px;
+	}
+
+	input,
+	select,
+	button {
+		font-size: 16px;
+		padding: 10px;
+	}
+
+	.button-row {
+		grid-template-columns: 1fr;
+	}
+
+	.checkbox-inline {
+		align-items: flex-start;
+	}
+
+	#log {
+		height: 120px;
+		font-size: 11px;
+	}
+
+	.leaflet-control-layers-expanded {
+		max-height: 45vh;
+		overflow-y: auto;
+	}
+
+	.leaflet-touch .leaflet-bar a {
+		width: 36px;
+		height: 36px;
+		line-height: 36px;
+		font-size: 18px;
+	}
+}
+
+@media (max-width: 420px) {
+	#sidebar {
+		left: 6px;
+		top: calc(env(safe-area-inset-top, 0px) + 6px);
+		width: calc(100% - 12px);
+		max-height: min(76dvh, calc(100% - 12px));
+	}
+}

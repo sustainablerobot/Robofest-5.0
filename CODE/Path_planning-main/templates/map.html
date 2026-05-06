@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Drone Mission Planner</title>
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	<link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+	<div id="app">
+		<main id="mapWrap">
+			<div id="map"></div>
+
+			<nav id="sidebar" class="is-collapsed" aria-label="Mission planner controls">
+				<div id="plannerNavHeader">
+					<h2>Mission Planner</h2>
+					<button id="btnTogglePlanner" type="button">Show Planner</button>
+				</div>
+
+				<section class="panel">
+					<h3>Connection</h3>
+					<label class="label" for="comport">COM / UDP</label>
+					<select id="comport"></select>
+					<input id="manualPort" type="text" placeholder="or type COM5 / udp:127.0.0.1:14550" />
+
+					<label class="label" for="baud">Baud</label>
+					<select id="baud">
+						<option value="57600">57600</option>
+						<option value="115200" selected>115200</option>
+						<option value="921600">921600</option>
+					</select>
+
+					<div class="button-row">
+						<button id="btnRefreshPorts">Refresh Ports</button>
+						<button id="btnConnect">Connect</button>
+						<button id="btnDisconnect">Disconnect</button>
+					</div>
+
+					<div id="connectionStatus" class="status-pill">Disconnected</div>
+				</section>
+
+				<section class="panel">
+					<h3>Planning Workflow</h3>
+					<div class="help-text">1) Click <strong>My Location</strong> and allow browser location.</div>
+					<div class="help-text">2) Click map points to draw area loop, then click <strong>Close Area</strong>.</div>
+					<div class="help-text">3) Add mines in selected area, then start/goal, then compute.</div>
+
+					<div class="button-row">
+						<button id="btnMyLocation">My Location</button>
+					</div>
+
+					<div class="button-row">
+						<button id="modeArea" class="mode-btn">Area Mode</button>
+						<button id="btnCloseArea">Close Area</button>
+					</div>
+
+					<div class="button-row">
+						<button id="btnClearArea">Clear Area</button>
+					</div>
+
+					<div class="button-row">
+						<button id="modeMine" class="mode-btn">Mine Mode</button>
+						<button id="modeStart" class="mode-btn">Start Mode</button>
+						<button id="modeGoal" class="mode-btn">Goal Mode</button>
+					</div>
+
+					<div class="button-row">
+						<button id="modeWaypoint" class="mode-btn">Waypoint Mode</button>
+					</div>
+
+					<label class="label" for="fakeMineCount">Fake Mines</label>
+					<input id="fakeMineCount" type="number" min="1" max="200" value="20" />
+
+					<div class="button-row">
+						<button id="btnAddFakeMines">Add Fake Mines</button>
+						<button id="btnClearMines">Clear Mines</button>
+					</div>
+
+					<label class="label" for="gridResolution">A* Grid Resolution (m)</label>
+					<input id="gridResolution" type="number" min="0.2" max="2" step="0.1" value="0.5" />
+
+					<div class="button-row">
+						<button id="btnComputePath">Compute Safe Path</button>
+						<button id="btnClearPath">Clear Path</button>
+					</div>
+
+					<label class="label" for="waypointSpacing">Mission Waypoint Spacing (m)</label>
+					<input id="waypointSpacing" type="number" min="0.5" max="5" step="0.5" value="1" />
+
+					<label class="checkbox-inline" for="autoStartAfterCompute">
+						<input id="autoStartAfterCompute" type="checkbox" checked />
+						Auto send mission + takeoff + start after safe path compute
+					</label>
+
+					<label class="label" for="missionAltitude">Upload Altitude (m)</label>
+					<input id="missionAltitude" type="number" min="1" max="120" step="1" value="10" />
+
+					<div class="button-row">
+						<button id="btnUploadMission">Upload Mission</button>
+					</div>
+
+					<div id="plannerStats" class="stats">Mines: 0 | Waypoints: 0</div>
+				</section>
+
+				<section class="panel">
+					<h3>System Log</h3>
+					<div id="log"></div>
+				</section>
+			</nav>
+		</main>
+	</div>
+
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+	<script src="/static/js/map.js"></script>
+	<script src="/static/js/planner.js"></script>
+</body>
+</html>

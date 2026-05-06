@@ -1,0 +1,6 @@
+Flask
+numpy
+pyproj
+shapely
+pymavlink
+pyserial
